@@ -3,22 +3,44 @@ apply plugin: 'java-gradle-plugin'
 apply plugin: "maven"
 apply plugin: 'com.novoda.bintray-release'
 
+repositories {
+    mavenLocal()
+    mavenCentral()
+    google()
+    jcenter()
+    maven { url "https://jitpack.io" }
+    // jcenter() { url "http://jcenter.bintray.com/" }
+    maven { url 'https://repo1.maven.org/maven2/' }
+    // central
+    maven { url 'https://maven.aliyun.com/nexus/content/repositories/central' }
+    // jcenter
+    maven { url 'https://maven.aliyun.com/nexus/content/repositories/jcenter' }
+    // public
+    maven { url 'https://maven.aliyun.com/nexus/content/groups/public' }
+    //google
+    maven { url 'https://maven.aliyun.com/nexus/content/repositories/google' }
+    //gradle-plugin
+    maven { url 'https://maven.aliyun.com/nexus/content/repositories/gradle-plugin' }
+    //apache snapshots
+    maven { url 'https://maven.aliyun.com/nexus/content/repositories/apache-snapshots' }
+}
+
 dependencies {
-  implementation gradleApi()
-  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${rootProject.ext.kotlin_version}"
-  implementation 'com.xander.plugin.asm:plugin-library:1.1.4'
+    implementation gradleApi()
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${rootProject.ext.kotlin_version}"
+    implementation 'com.xander.plugin.asm:plugin-library:1.1.4'
 }
 
 compileKotlin {
-  kotlinOptions {
-    jvmTarget = "1.8"
-  }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 
 compileTestKotlin {
-  kotlinOptions {
-    jvmTarget = "1.8"
-  }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 
 // git项目的地址
@@ -31,28 +53,28 @@ def _artifactId = 'performance'
 def _version = rootProject.ext.lib_publish_version
 
 uploadArchives {
-  repositories.mavenDeployer {
-    repository(url: uri("${rootProject.ext.local_repo_path}"))
-    pom.groupId = _group
-    pom.artifactId = _artifactId
-    pom.version = "$_version"
-  }
+    repositories.mavenDeployer {
+        repository(url: uri("${rootProject.ext.local_repo_path}"))
+        pom.groupId = _group
+        pom.artifactId = _artifactId
+        pom.version = "$_version"
+    }
 }
 
 publish {
-  // 各个字段的含义见 https://github.com/novoda/bintray-release/wiki/Configuration-of-the-publish-closure
-  Properties properties = new Properties()
-  properties.load(rootProject.file('local.properties').newDataInputStream())
-  def user = properties.getProperty('BINTRAY_USER', 'xanderwang')
-  def key = properties.getProperty('BINTRAY_KEY', 'xxx')
-  userOrg = user
-  repoName = 'maven'
-  groupId = _group
-  artifactId = _artifactId
-  publishVersion = _version
-  dryRun = false
-  desc = 'a gradle plugin for android , it can check app performance'
-  website = _siteUrl
-  bintrayUser = user
-  bintrayKey = key
+    // 各个字段的含义见 https://github.com/novoda/bintray-release/wiki/Configuration-of-the-publish-closure
+    Properties properties = new Properties()
+    properties.load(rootProject.file('local.properties').newDataInputStream())
+    def user = properties.getProperty('BINTRAY_USER', 'xanderwang')
+    def key = properties.getProperty('BINTRAY_KEY', 'xxx')
+    userOrg = user
+    repoName = 'maven'
+    groupId = _group
+    artifactId = _artifactId
+    publishVersion = _version
+    dryRun = false
+    desc = 'a gradle plugin for android , it can check app performance'
+    website = _siteUrl
+    bintrayUser = user
+    bintrayKey = key
 }

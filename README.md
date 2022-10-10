@@ -1,7 +1,6 @@
 # 简介
 
-由于本人工作需要，需要解决一些性能问题，虽然有 `Profiler` 、`Systrace
-` 等工具，但是无法实时监控，多少有些不方便，于是计划写一个能实时监控性能的小工具。经过学习大佬们的文章，最终完成了这个开源的性能实时检测库。初步能达到预期效果，这里做个记录，算是小结了。
+由于本人工作需要，需要解决一些性能问题，虽然有 `Profiler` 、`Systrace` 等工具，但是无法实时监控，多少有些不方便，于是计划写一个能实时监控性能的小工具。经过学习大佬们的文章，最终完成了这个开源的性能实时检测库。初步能达到预期效果，这里做个记录，算是小结了。
 
 开源库的[地址](https://github.com/xanderwang/performance)是:
 
@@ -26,7 +25,7 @@
 
 1 在 `APP` 工程目录下面的 `build.gradle` 添加如下内容。
 
-```groovy
+``` groovy
 dependencies {
   // 基础依赖，必须添加
   debugImplementation 'io.github.xanderwang:performance:0.3.2'
@@ -48,7 +47,7 @@ dependencies {
 
 Java 初始化示例
 
-```java
+``` java
   private void initPERF(final Context context) {
     final PERF.LogFileUploader logFileUploader = new PERF.LogFileUploader() {
       @Override
@@ -90,7 +89,7 @@ Java 初始化示例
 
 kotlin 示例
 
-```kotlin
+``` kotlin
   private fun doUpload(log: File): Boolean {
     return false
   }

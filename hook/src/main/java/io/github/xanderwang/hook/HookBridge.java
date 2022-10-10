@@ -42,6 +42,7 @@ public class HookBridge {
             iHookBridge = iterator.next();
             aLog.e(TAG, "HookBridge init find instance: %s", iHookBridge.getClass());
         }
+
     }
 
     /**
@@ -144,7 +145,7 @@ public class HookBridge {
         aLog.d(TAG, "hookMethod: %s", aUtil.memberToString(hookMethod));
         try {
             iHookBridge.hookMethod(hookMethod, callback);
-        } catch (Exception e) {
+        } catch (Throwable e) {
             aLog.e(TAG, "hookMethod", e);
         }
     }

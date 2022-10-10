@@ -35,18 +35,31 @@ buildscript {
 
     repositories {
         maven { url uri("${rootProject.ext.local_repo_path}") }
-        mavenCentral()
         maven { url "https://maven.aliyun.com/repository/google" }
         maven { url 'https://maven.aliyun.com/repository/public' }
+        mavenLocal()
+        mavenCentral()
         google()
+        jcenter()
+        maven { url "https://jitpack.io" }
+        // jcenter() { url "http://jcenter.bintray.com/" }
+        maven { url 'https://repo1.maven.org/maven2/' }
+        // central
+        maven { url 'https://maven.aliyun.com/nexus/content/repositories/central' }
+        // jcenter
+        maven { url 'https://maven.aliyun.com/nexus/content/repositories/jcenter' }
+        // public
+        maven { url 'https://maven.aliyun.com/nexus/content/groups/public' }
+        //google
+        maven { url 'https://maven.aliyun.com/nexus/content/repositories/google' }
+        //gradle-plugin
+        maven { url 'https://maven.aliyun.com/nexus/content/repositories/gradle-plugin' }
+        //apache snapshots
+        maven { url 'https://maven.aliyun.com/nexus/content/repositories/apache-snapshots' }
     }
 
     dependencies {
-
         classpath 'com.android.tools.build:gradle:7.0.4'
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${rootProject.ext.kotlin_version}"
     }
 }
@@ -56,12 +69,28 @@ allprojects {
     println("enter ${project.name} allprojects")
 
     repositories {
-        maven { url 'https://jitpack.io' }
+        maven { url uri("${rootProject.ext.local_repo_path}") }
         maven { url "https://maven.aliyun.com/repository/google" }
         maven { url 'https://maven.aliyun.com/repository/public' }
+        mavenLocal()
         mavenCentral()
         google()
-        maven { url uri("${rootProject.ext.local_repo_path}") }
+        jcenter()
+        maven { url "https://jitpack.io" }
+        // jcenter() { url "http://jcenter.bintray.com/" }
+        maven { url 'https://repo1.maven.org/maven2/' }
+        // central
+        maven { url 'https://maven.aliyun.com/nexus/content/repositories/central' }
+        // jcenter
+        maven { url 'https://maven.aliyun.com/nexus/content/repositories/jcenter' }
+        // public
+        maven { url 'https://maven.aliyun.com/nexus/content/groups/public' }
+        //google
+        maven { url 'https://maven.aliyun.com/nexus/content/repositories/google' }
+        //gradle-plugin
+        maven { url 'https://maven.aliyun.com/nexus/content/repositories/gradle-plugin' }
+        //apache snapshots
+        maven { url 'https://maven.aliyun.com/nexus/content/repositories/apache-snapshots' }
     }
 
     // add dependency substitution rules

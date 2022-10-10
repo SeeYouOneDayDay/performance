@@ -36,6 +36,47 @@ android {
             keyPassword 'performance'
         }
     }
+
+    dexOptions {
+        preDexLibraries false
+        maxProcessCount 8
+        javaMaxHeapSize "4g"
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    aaptOptions {
+        cruncherEnabled = false
+        useNewCruncher = false
+    }
+    testOptions {
+        unitTests.returnDefaultValues = true
+        resultsDir = "${project.buildDir}/ut_results"
+    }
+    lintOptions {
+        checkReleaseBuilds true
+        quiet true
+        abortOnError false
+        ignoreWarnings true
+        textOutput "stdout"
+        textReport false
+        disable
+        disable "UnusedResources", 'RestrictedApi'
+        // turn off checking the given issue id's
+        disable 'TypographyFractions', 'TypographyQuotes'
+        // turn on the given issue id's
+        enable 'RtlHardcoded', 'RtlCompat', 'RtlEnabled'
+        // check *only* the given issue id's
+        check 'NewApi', 'InlinedApi'
+    }
+}
+
+tasks.withType(Javadoc) {
+    options.addStringOption('Xdoclint:none', '-quiet')
+    options.addStringOption('encoding', 'UTF-8')
+    options.addStringOption('charSet', 'UTF-8')
+    options.encoding = "UTF-8"
 }
 
 dependencies {
@@ -67,7 +108,7 @@ dependencies {
 
     // 以下是 hook 方案选择一个就好了。如果运行报错，就换另外一个，如果还是报错，就提个 issue
     // SandHook 方案，推荐添加。如果运行报错，可以替换为 epic 库。
-    //  debugImplementation 'io.github.xanderwang:hook-sandhook:0.3.5'
+//      debugImplementation 'io.github.xanderwang:hook-sandhook:0.3.5'
 
     // epic 方法。如果运行报错，可以替换为 SandHook。
     debugImplementation 'io.github.xanderwang:hook-epic:0.3.5'
